@@ -1,0 +1,70 @@
+/* ── YT Shield – content.css ─────────────────────────────────────────────── */
+/* Hides ad units, end cards, overlays, and clutter on YouTube.              */
+/* Uses !important to override YouTube's inline styles.                      */
+
+/* ── Pre-roll / mid-roll video ads ──────────────────────────────────────── */
+.ad-showing .ytp-ad-module,
+.ad-interrupting,
+.ytp-ad-overlay-container,
+.ytp-ad-text-overlay,
+.ytp-ad-image-overlay,
+.ytp-ad-skip-button-container,
+.ytp-ad-skip-button-modern,
+.ytp-ad-feedback-dialog-container,
+.ytp-ad-action-interstitial,
+.ytp-ad-player-overlay,
+.ytp-ad-player-overlay-instream-info,
+.ytp-ad-preview-container,
+.ytp-ad-preview-container-modern,
+.ytp-ad-button-icon,
+.ytp-ad-visit-advertiser-button,
+.ytp-ce-element,                         /* End cards */
+.ytp-ce-covering-overlay,
+.ytp-ce-element-shadow,
+.ytp-cards-teaser,                       /* Info cards teaser */
+.ytp-cards-button,
+.ytp-cards-card-box,
+.iv-branding,                            /* Branding watermarks */
+.ytp-watermark,
+.annotation,
+.annotation-type-custom,
+.video-annotations { display: none !important; }
+
+/* ── Sidebar / homepage ads ──────────────────────────────────────────────── */
+ytd-ad-slot-renderer,
+ytd-banner-promo-renderer,
+ytd-statement-banner-renderer,
+ytd-promoted-sparkles-web-renderer,
+ytd-promoted-video-renderer,
+ytd-display-ad-renderer,
+ytd-compact-promoted-item-renderer,
+ytd-masthead-ad-v3-renderer,
+ytd-masthead-ad-v4-renderer,
+ytd-brand-video-shelf-renderer,
+ytd-brand-video-singleton-renderer,
+ytd-shopping-recap-renderer,
+ytd-merch-shelf-renderer,               /* Merch shelf */
+ytd-product-details-image-renderer,
+tp-yt-paper-dialog[aria-label="Offers"],
+#player-ads,
+#masthead-ad,
+.ytd-banner-promo-renderer { display: none !important; }
+
+/* ── End screen overlay (the clickable cards at end of video) ────────────── */
+.ytp-endscreen-content,
+.ytp-player-content .ytp-ce-element { display: none !important; }
+
+/* ── Premium upsell prompts ──────────────────────────────────────────────── */
+ytd-mealbar-promo-renderer,
+.ytd-mealbar-promo-renderer { display: none !important; }
+
+/* ── Surveys / feedback popups ───────────────────────────────────────────── */
+.yt-survey-questions-renderer,
+ytd-survey-renderer { display: none !important; }
+
+/* ── Skip ad button hider (let JS auto-click it instead) ────────────────── */
+/* Kept visible so the JS can click it — hidden via opacity after click      */
+
+/* ── Donation / Super Thanks prompts ─────────────────────────────────────── */
+ytd-donation-companion-renderer,
+ytd-super-thanks-dialog-view-model { display: none !important; }

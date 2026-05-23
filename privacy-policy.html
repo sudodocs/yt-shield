@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>YT Shield – Privacy Policy</title>
+<style>
+  body {
+    font-family: -apple-system, Segoe UI, sans-serif;
+    max-width: 720px;
+    margin: 60px auto;
+    padding: 0 24px;
+    color: #1a1a1a;
+    line-height: 1.7;
+  }
+  h1 { font-size: 28px; font-weight: 700; margin-bottom: 4px; }
+  h2 { font-size: 17px; font-weight: 600; margin: 32px 0 8px; }
+  .meta { color: #666; font-size: 14px; margin-bottom: 40px; }
+  p { margin: 0 0 16px; }
+  ul { margin: 0 0 16px 20px; }
+  li { margin-bottom: 6px; }
+  .highlight {
+    background: #fff3cd;
+    border-left: 4px solid #ffc107;
+    padding: 14px 18px;
+    border-radius: 4px;
+    margin: 24px 0;
+    font-weight: 500;
+  }
+  footer { margin-top: 60px; color: #999; font-size: 13px; border-top: 1px solid #eee; padding-top: 20px; }
+</style>
+</head>
+<body>
+
+<h1>Privacy Policy</h1>
+<p class="meta">YT Shield – Ad Blocker &amp; Auto-Refresh &nbsp;·&nbsp; Last updated: June 2025</p>
+
+<div class="highlight">
+  TL;DR: YT Shield collects no data whatsoever. Nothing leaves your browser.
+</div>
+
+<h2>What data we collect</h2>
+<p><strong>None.</strong> YT Shield does not collect, transmit, store, or share any personal data, browsing data, or usage data.</p>
+
+<h2>What the extension does locally</h2>
+<p>YT Shield operates entirely within your browser. It does the following, all locally:</p>
+<ul>
+  <li>Injects CSS and JavaScript into YouTube pages to remove ad elements and end cards</li>
+  <li>Blocks network requests to known ad-serving domains using Chrome's declarativeNetRequest API</li>
+  <li>Monitors the YouTube video player for errors and triggers a page refresh if one is detected</li>
+  <li>Saves your feature toggle preferences (on/off) using Chrome's <code>storage.sync</code> API — this is stored in your browser and synced across your own Chrome profile only</li>
+</ul>
+
+<h2>Data we do NOT collect</h2>
+<ul>
+  <li>No browsing history</li>
+  <li>No YouTube watch history or video data</li>
+  <li>No personal identifiers (name, email, IP address)</li>
+  <li>No analytics or telemetry</li>
+  <li>No crash reports sent to any server</li>
+</ul>
+
+<h2>Third-party services</h2>
+<p>YT Shield has no backend server, no analytics service, and no third-party integrations of any kind. The extension communicates with no external server.</p>
+
+<h2>Permissions explained</h2>
+<p>The permissions requested by YT Shield are the minimum required for its features to work:</p>
+<ul>
+  <li><strong>tabs</strong> — to detect YouTube page navigation and reset the auto-refresh counter</li>
+  <li><strong>scripting</strong> — to inject the ad-removal content script into YouTube pages</li>
+  <li><strong>storage</strong> — to save your feature toggle preferences locally</li>
+  <li><strong>declarativeNetRequest</strong> — to block ad network requests before they load</li>
+</ul>
+
+<h2>Children's privacy</h2>
+<p>YT Shield does not collect data from anyone, including children under 13.</p>
+
+<h2>Changes to this policy</h2>
+<p>If this policy changes, the updated version will be published at this URL with a new effective date.</p>
+
+<h2>Contact</h2>
+<p>Questions? Open an issue on the GitHub repository or contact the developer directly through the Chrome Web Store listing.</p>
+
+<footer>
+  YT Shield is an independent open-source project and is not affiliated with YouTube, Google, or Alphabet Inc.
+</footer>
+
+</body>
+</html>
