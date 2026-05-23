@@ -6,180 +6,37 @@
 <title>YT Shield</title>
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
-
-  body {
-    font-family: -apple-system, 'Segoe UI', sans-serif;
-    background: #0f0f0f;
-    color: #f1f1f1;
-    width: 300px;
-    padding: 0;
-    user-select: none;
-  }
-
-  .header {
-    background: #ff0000;
-    padding: 14px 18px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-
+  body { font-family: -apple-system, 'Segoe UI', sans-serif; background: #0f0f0f; color: #f1f1f1; width: 300px; user-select: none; }
+  .header { background: #ff0000; padding: 14px 18px; display: flex; align-items: center; gap: 10px; }
   .header svg { flex-shrink: 0; }
-
-  .header-text h1 {
-    font-size: 15px;
-    font-weight: 700;
-    letter-spacing: 0.3px;
-    color: #fff;
-  }
-
-  .header-text p {
-    font-size: 11px;
-    color: rgba(255,255,255,0.75);
-    margin-top: 2px;
-  }
-
-  .stats-bar {
-    background: #1a1a1a;
-    display: flex;
-    border-bottom: 1px solid #2a2a2a;
-  }
-
-  .stat {
-    flex: 1;
-    padding: 10px;
-    text-align: center;
-    border-right: 1px solid #2a2a2a;
-  }
-
+  .header-text h1 { font-size: 15px; font-weight: 700; letter-spacing: 0.3px; color: #fff; }
+  .header-text p { font-size: 11px; color: rgba(255,255,255,0.75); margin-top: 2px; }
+  .stats-bar { background: #1a1a1a; display: flex; border-bottom: 1px solid #2a2a2a; }
+  .stat { flex: 1; padding: 10px; text-align: center; border-right: 1px solid #2a2a2a; }
   .stat:last-child { border-right: none; }
-
-  .stat-val {
-    font-size: 18px;
-    font-weight: 700;
-    color: #ff4444;
-  }
-
-  .stat-label {
-    font-size: 10px;
-    color: #888;
-    margin-top: 2px;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-  }
-
-  .section-title {
-    font-size: 10px;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    color: #555;
-    padding: 14px 18px 6px;
-  }
-
-  .toggle-row {
-    display: flex;
-    align-items: center;
-    padding: 10px 18px;
-    cursor: pointer;
-    transition: background 0.15s;
-    gap: 12px;
-  }
-
+  .stat-val { font-size: 18px; font-weight: 700; color: #ff4444; }
+  .stat-label { font-size: 10px; color: #888; margin-top: 2px; text-transform: uppercase; letter-spacing: 0.5px; }
+  .reset-row { text-align: right; padding: 4px 14px 0; font-size: 10px; color: #444; cursor: pointer; }
+  .reset-row:hover { color: #888; }
+  .section-title { font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: #555; padding: 14px 18px 6px; }
+  .toggle-row { display: flex; align-items: center; padding: 10px 18px; cursor: pointer; transition: background 0.15s; gap: 12px; }
   .toggle-row:hover { background: #1a1a1a; }
-
-  .toggle-icon {
-    font-size: 18px;
-    width: 24px;
-    text-align: center;
-    flex-shrink: 0;
-  }
-
+  .toggle-icon { font-size: 18px; width: 24px; text-align: center; flex-shrink: 0; }
   .toggle-info { flex: 1; }
-
-  .toggle-name {
-    font-size: 13px;
-    font-weight: 500;
-    color: #f1f1f1;
-  }
-
-  .toggle-desc {
-    font-size: 11px;
-    color: #666;
-    margin-top: 2px;
-  }
-
-  /* Toggle switch */
-  .switch {
-    position: relative;
-    width: 38px;
-    height: 21px;
-    flex-shrink: 0;
-  }
-
+  .toggle-name { font-size: 13px; font-weight: 500; color: #f1f1f1; }
+  .toggle-desc { font-size: 11px; color: #666; margin-top: 2px; }
+  .switch { position: relative; width: 38px; height: 21px; flex-shrink: 0; }
   .switch input { display: none; }
-
-  .slider {
-    position: absolute;
-    inset: 0;
-    background: #333;
-    border-radius: 21px;
-    transition: background 0.2s;
-    cursor: pointer;
-  }
-
-  .slider::before {
-    content: '';
-    position: absolute;
-    width: 15px;
-    height: 15px;
-    background: #fff;
-    border-radius: 50%;
-    top: 3px;
-    left: 3px;
-    transition: transform 0.2s;
-  }
-
+  .slider { position: absolute; inset: 0; background: #333; border-radius: 21px; transition: background 0.2s; cursor: pointer; }
+  .slider::before { content: ''; position: absolute; width: 15px; height: 15px; background: #fff; border-radius: 50%; top: 3px; left: 3px; transition: transform 0.2s; }
   input:checked + .slider { background: #ff0000; }
   input:checked + .slider::before { transform: translateX(17px); }
-
-  .divider {
-    height: 1px;
-    background: #1e1e1e;
-    margin: 0 18px;
-  }
-
-  .footer {
-    padding: 12px 18px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    border-top: 1px solid #1e1e1e;
-    margin-top: 6px;
-  }
-
-  .footer-badge {
-    font-size: 10px;
-    color: #555;
-  }
-
-  .status-dot {
-    width: 7px;
-    height: 7px;
-    background: #4caf50;
-    border-radius: 50%;
-    display: inline-block;
-    margin-right: 5px;
-    box-shadow: 0 0 5px #4caf50;
-  }
-
-  .github-link {
-    font-size: 10px;
-    color: #555;
-    text-decoration: none;
-  }
-
-  .github-link:hover { color: #999; }
+  .divider { height: 1px; background: #1e1e1e; margin: 0 18px; }
+  .footer { padding: 12px 18px; display: flex; align-items: center; justify-content: space-between; border-top: 1px solid #1e1e1e; margin-top: 6px; }
+  .footer-badge { font-size: 10px; color: #555; }
+  .status-dot { width: 7px; height: 7px; background: #4caf50; border-radius: 50%; display: inline-block; margin-right: 5px; box-shadow: 0 0 5px #4caf50; }
+  .author { padding: 0 18px 12px; font-size: 10px; color: #333; }
+  .author a { color: #555; text-decoration: none; }
 </style>
 </head>
 <body>
@@ -195,119 +52,40 @@
   </div>
 </div>
 
-<div class="stats-bar">
-  <div class="stat">
-    <div class="stat-val" id="ads-blocked">0</div>
-    <div class="stat-label">Ads Blocked</div>
-  </div>
-  <div class="stat">
-    <div class="stat-val" id="refreshes">0</div>
-    <div class="stat-label">Refreshes</div>
-  </div>
-  <div class="stat">
-    <div class="stat-val" id="cards-rm">0</div>
-    <div class="stat-label">Cards Removed</div>
-  </div>
-</div>
+
 
 <div class="section-title">Features</div>
 
-<div class="toggle-row" onclick="toggle('blockAds')">
+<div class="toggle-row" id="row-blockAds">
   <div class="toggle-icon">🚫</div>
-  <div class="toggle-info">
-    <div class="toggle-name">Block Ads</div>
-    <div class="toggle-desc">Network + DOM ad blocking</div>
-  </div>
-  <label class="switch" onclick="event.stopPropagation()">
-    <input type="checkbox" id="blockAds" onchange="save('blockAds')">
-    <span class="slider"></span>
-  </label>
+  <div class="toggle-info"><div class="toggle-name">Block Ads</div><div class="toggle-desc">Network + DOM ad blocking</div></div>
+  <label class="switch"><input type="checkbox" id="blockAds" checked><span class="slider"></span></label>
 </div>
-
 <div class="divider"></div>
-
-<div class="toggle-row" onclick="toggle('autoSkip')">
+<div class="toggle-row" id="row-autoSkip">
   <div class="toggle-icon">⏭️</div>
-  <div class="toggle-info">
-    <div class="toggle-name">Auto-Skip Ads</div>
-    <div class="toggle-desc">Click skip button instantly</div>
-  </div>
-  <label class="switch" onclick="event.stopPropagation()">
-    <input type="checkbox" id="autoSkip" onchange="save('autoSkip')">
-    <span class="slider"></span>
-  </label>
+  <div class="toggle-info"><div class="toggle-name">Auto-Skip Ads</div><div class="toggle-desc">Click skip button instantly</div></div>
+  <label class="switch"><input type="checkbox" id="autoSkip" checked><span class="slider"></span></label>
 </div>
-
 <div class="divider"></div>
-
-<div class="toggle-row" onclick="toggle('removeEndCards')">
+<div class="toggle-row" id="row-removeEndCards">
   <div class="toggle-icon">🃏</div>
-  <div class="toggle-info">
-    <div class="toggle-name">Remove End Cards</div>
-    <div class="toggle-desc">Hide end screens &amp; info cards</div>
-  </div>
-  <label class="switch" onclick="event.stopPropagation()">
-    <input type="checkbox" id="removeEndCards" onchange="save('removeEndCards')">
-    <span class="slider"></span>
-  </label>
+  <div class="toggle-info"><div class="toggle-name">Remove End Cards</div><div class="toggle-desc">Hide end screens &amp; info cards</div></div>
+  <label class="switch"><input type="checkbox" id="removeEndCards" checked><span class="slider"></span></label>
 </div>
-
 <div class="divider"></div>
-
-<div class="toggle-row" onclick="toggle('autoRefresh')">
+<div class="toggle-row" id="row-autoRefresh">
   <div class="toggle-icon">🔄</div>
-  <div class="toggle-info">
-    <div class="toggle-name">Auto-Refresh on Error</div>
-    <div class="toggle-desc">Fix playback errors automatically</div>
-  </div>
-  <label class="switch" onclick="event.stopPropagation()">
-    <input type="checkbox" id="autoRefresh" onchange="save('autoRefresh')">
-    <span class="slider"></span>
-  </label>
+  <div class="toggle-info"><div class="toggle-name">Auto-Refresh on Error</div><div class="toggle-desc">Fix playback errors automatically</div></div>
+  <label class="switch"><input type="checkbox" id="autoRefresh" checked><span class="slider"></span></label>
 </div>
 
 <div class="footer">
   <span class="footer-badge"><span class="status-dot"></span>Active on YouTube</span>
   <span class="footer-badge">v1.0.0</span>
 </div>
+<div class="author">By <a href="https://github.com/SudoDocs">Saurabh Sugandh (SudoDocs)</a></div>
 
-<script>
-const DEFAULTS = { blockAds: true, autoSkip: true, removeEndCards: true, autoRefresh: true };
-const KEYS = Object.keys(DEFAULTS);
-
-// Use local storage — more reliable than sync, especially on Brave
-// On very first load, nothing is stored yet so we write the defaults explicitly
-chrome.storage.local.get(KEYS, (stored) => {
-  const toWrite = {};
-  KEYS.forEach(k => {
-    // If key was never saved before, use the default and queue it for writing
-    const val = (k in stored) ? stored[k] : DEFAULTS[k];
-    if (!(k in stored)) toWrite[k] = val;
-    const el = document.getElementById(k);
-    if (el) el.checked = val;
-  });
-  // Write any missing defaults so they persist from now on
-  if (Object.keys(toWrite).length > 0) {
-    chrome.storage.local.set(toWrite);
-  }
-});
-
-// Load stats
-chrome.storage.local.get({ adsBlocked: 0, refreshes: 0, cardsRemoved: 0 }, (s) => {
-  document.getElementById('ads-blocked').textContent = s.adsBlocked;
-  document.getElementById('refreshes').textContent = s.refreshes;
-  document.getElementById('cards-rm').textContent = s.cardsRemoved;
-});
-
-function toggle(key) {
-  const el = document.getElementById(key);
-  if (el) { el.checked = !el.checked; save(key); }
-}
-
-function save(key) {
-  const el = document.getElementById(key);
-  if (el) chrome.storage.local.set({ [key]: el.checked });
-}
-</script>
+<script src="popup.js"></script>
 </body>
 </html>

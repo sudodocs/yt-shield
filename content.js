@@ -15,19 +15,23 @@
 
   let settings = { ...DEFAULTS };
 
-  // Load saved settings from local storage
-  chrome.storage.local.get(Object.keys(DEFAULTS), (saved) => {
-    settings = { ...DEFAULTS, ...saved };
+  // Load settings from chrome.storage.local (written by popup on every toggle)
+  chrome.storage.local.get(DEFAULTS, (saved) => {
+    if (!chrome.runtime.lastError) settings = { ...DEFAULTS, ...saved };
   });
 
-  // Listen for toggle updates from popup
+  // Live updates when user toggles in popup — no page refresh needed
   chrome.storage.onChanged.addListener((changes, area) => {
     if (area !== 'local') return;
     for (const key in changes) {
-      if (key in settings) settings[key] = changes[key].newValue;
+      if (key in settings) {
+        settings[key] = changes[key].newValue;
+        console.log(`[YT Shield] ${key} set to ${changes[key].newValue}`);
+      }
     }
   });
 
+  // ── Counters ───────────────────────────────────────────────────────────
   // ── Auto-refresh config ────────────────────────────────────────────────
   const R = {
     checkInterval: 3000,
@@ -77,6 +81,7 @@
     // Speed through unskippable ads
     const video = document.querySelector("video");
     if (video && document.querySelector(".ad-showing")) {
+      if (video.playbackRate !== 16)
       video.playbackRate = 16;
       video.currentTime = video.duration - 0.1;
     }
@@ -151,9 +156,11 @@
 
   function removeClutter() {
     if (!settings.removeEndCards) return;
+    let removed = 0;
     REMOVE_SELECTORS.forEach((sel) => {
-      document.querySelectorAll(sel).forEach((el) => el.remove());
+      document.querySelectorAll(sel).forEach((el) => { el.remove(); removed++; });
     });
+    if (removed > 0)
   }
 
   // ── MutationObserver for dynamic DOM changes ───────────────────────────

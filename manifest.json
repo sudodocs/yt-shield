@@ -1,6 +1,7 @@
 {
   "manifest_version": 3,
   "name": "YT Shield – Ad Blocker & Auto-Refresh",
+  "author": "Saurabh Sugandh (SudoDocs)",
   "version": "1.0.0",
   "description": "Blocks YouTube ads, removes end cards & overlays, and auto-refreshes when video errors occur. Works on Chrome and Brave.",
   "permissions": ["tabs", "scripting", "storage", "declarativeNetRequest"],
@@ -11,6 +12,9 @@
     "*://*.googleadservices.com/*",
     "*://*.google-analytics.com/*"
   ],
+  "background": {
+    "service_worker": "background.js"
+  },
   "content_scripts": [
     {
       "matches": ["*://*.youtube.com/*"],
