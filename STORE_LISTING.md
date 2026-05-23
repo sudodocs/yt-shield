@@ -61,6 +61,9 @@ youtube, ad blocker, youtube ads, skip ads, end cards, auto refresh, youtube enh
 ## Pricing
 Free
 
+## Publisher
+SudoDocs (Saurabh Sugandh)
+
 ## Developer Notes
 - Built with Manifest V3 (the current Chrome extension standard)
 - No background service worker needed for core features
