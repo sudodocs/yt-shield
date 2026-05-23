@@ -15,13 +15,14 @@
 
   let settings = { ...DEFAULTS };
 
-  // Load saved settings from storage
-  chrome.storage.sync.get(DEFAULTS, (saved) => {
+  // Load saved settings from local storage
+  chrome.storage.local.get(Object.keys(DEFAULTS), (saved) => {
     settings = { ...DEFAULTS, ...saved };
   });
 
   // Listen for toggle updates from popup
-  chrome.storage.onChanged.addListener((changes) => {
+  chrome.storage.onChanged.addListener((changes, area) => {
+    if (area !== 'local') return;
     for (const key in changes) {
       if (key in settings) settings[key] = changes[key].newValue;
     }

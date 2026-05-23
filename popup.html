@@ -273,15 +273,26 @@
 
 <script>
 const DEFAULTS = { blockAds: true, autoSkip: true, removeEndCards: true, autoRefresh: true };
+const KEYS = Object.keys(DEFAULTS);
 
-chrome.storage.sync.get(DEFAULTS, (s) => {
-  for (const k in s) {
+// Use local storage — more reliable than sync, especially on Brave
+// On very first load, nothing is stored yet so we write the defaults explicitly
+chrome.storage.local.get(KEYS, (stored) => {
+  const toWrite = {};
+  KEYS.forEach(k => {
+    // If key was never saved before, use the default and queue it for writing
+    const val = (k in stored) ? stored[k] : DEFAULTS[k];
+    if (!(k in stored)) toWrite[k] = val;
     const el = document.getElementById(k);
-    if (el) el.checked = s[k];
+    if (el) el.checked = val;
+  });
+  // Write any missing defaults so they persist from now on
+  if (Object.keys(toWrite).length > 0) {
+    chrome.storage.local.set(toWrite);
   }
 });
 
-// Load stats from local storage
+// Load stats
 chrome.storage.local.get({ adsBlocked: 0, refreshes: 0, cardsRemoved: 0 }, (s) => {
   document.getElementById('ads-blocked').textContent = s.adsBlocked;
   document.getElementById('refreshes').textContent = s.refreshes;
@@ -295,7 +306,7 @@ function toggle(key) {
 
 function save(key) {
   const el = document.getElementById(key);
-  if (el) chrome.storage.sync.set({ [key]: el.checked });
+  if (el) chrome.storage.local.set({ [key]: el.checked });
 }
 </script>
 </body>
