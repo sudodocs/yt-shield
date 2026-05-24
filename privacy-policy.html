@@ -33,7 +33,7 @@
 <body>
 
 <h1>Privacy Policy</h1>
-<p class="meta">YT Shield – Ad Blocker &amp; Auto-Refresh &nbsp;·&nbsp; Last updated: May 2026</p>
+<p class="meta">YT Shield – Auto-Refresh for YouTube &nbsp;·&nbsp; Last updated: May 2026</p>
 
 <div class="highlight">
   TL;DR: YT Shield collects no data whatsoever. Nothing leaves your browser.
@@ -45,10 +45,9 @@
 <h2>What the extension does locally</h2>
 <p>YT Shield operates entirely within your browser. It does the following, all locally:</p>
 <ul>
-  <li>Injects CSS and JavaScript into YouTube pages to remove ad elements and end cards</li>
-  <li>Blocks network requests to known ad-serving domains using Chrome's declarativeNetRequest API</li>
-  <li>Monitors the YouTube video player for errors and triggers a page refresh if one is detected</li>
-  <li>Saves your feature toggle preferences (on/off) using Chrome's <code>storage.sync</code> API — this is stored in your browser and synced across your own Chrome profile only</li>
+  <li>Monitors the YouTube video player for errors, blank screens, and frozen playback</li>
+  <li>Automatically refreshes the page when a playback error is detected</li>
+  <li>Saves your on/off toggle preference using Chrome's <code>storage.local</code> API — stored locally in your browser only</li>
 </ul>
 
 <h2>Data we do NOT collect</h2>
@@ -66,10 +65,8 @@
 <h2>Permissions explained</h2>
 <p>The permissions requested by YT Shield are the minimum required for its features to work:</p>
 <ul>
-  <li><strong>tabs</strong> — to detect YouTube page navigation and reset the auto-refresh counter</li>
-  <li><strong>scripting</strong> — to inject the ad-removal content script into YouTube pages</li>
-  <li><strong>storage</strong> — to save your feature toggle preferences locally</li>
-  <li><strong>declarativeNetRequest</strong> — to block ad network requests before they load</li>
+  <li><strong>tabs</strong> — to detect YouTube page navigation and reset the auto-refresh counter between videos</li>
+  <li><strong>storage</strong> — to save your on/off toggle preference locally in your browser</li>
 </ul>
 
 <h2>Children's privacy</h2>

@@ -1,9 +1,5 @@
-const DEFAULTS = {
-  blockAds: true,
-  autoSkip: true,
-  removeEndCards: true,
-  autoRefresh: true,
-};
+// YT Shield – background.js
+const DEFAULTS = { autoRefresh: true };
 
 chrome.runtime.onInstalled.addListener(() => {
   chrome.storage.local.get(Object.keys(DEFAULTS), (stored) => {

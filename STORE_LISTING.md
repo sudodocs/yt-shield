@@ -3,37 +3,32 @@
 ---
 
 ## Extension Name
-YT Shield – Ad Blocker & Auto-Refresh
+YT Shield – Auto-Refresh for YouTube
 
 ## Short Description (132 chars max)
-Blocks YouTube ads, removes end cards & overlays, and auto-refreshes when video errors occur. Works on Chrome and Brave.
+Automatically refreshes YouTube when ad-blocker detection causes a blank video or playback error. No more manual refreshing.
 
 ---
 
 ## Full Description (for Chrome Web Store)
 
-**YT Shield** is a lightweight YouTube enhancement extension that does four things really well:
+**Tired of refreshing YouTube manually every time the video goes blank?**
 
-🚫 **Block Ads**
-Blocks YouTube ads at the network level before they load, and hides ad DOM elements so your viewing experience stays clean. No pre-rolls, no mid-rolls, no banner ads.
+YouTube detects ad-blockers and responds by blanking the video player — sometimes playing ad audio in the background — or showing a "An error occurred, please try again" message. The only fix is to manually refresh the page, every single time.
 
-⏭️ **Auto-Skip Ads**
-If a skippable ad does appear, YT Shield clicks the skip button the moment it becomes available. For unskippable short ads, it fast-forwards through them automatically.
-
-🃏 **Remove End Cards & Overlays**
-Hides the clickable end-screen cards, info card teasers, branding overlays, and channel watermarks that cover the video at the end. Watch the full video without distractions.
+**YT Shield fixes this automatically.**
 
 🔄 **Auto-Refresh on Error**
-When YouTube detects an ad-blocker and shows a playback error ("An error occurred, please try again"), YT Shield automatically refreshes the page so your video resumes without any manual action.
+Detects YouTube's playback error overlay and refreshes the page automatically so your video resumes without any action from you.
 
-**Toggle each feature individually** from the popup — you're in full control.
+📺 **Blank Video Detection**
+Detects when the video player loads blank (YouTube's ad-blocker punishment) and triggers a refresh before you even notice.
 
----
+⏸️ **Frozen Video Detection**
+If your video stops progressing for more than 12 seconds, YT Shield refreshes the page to get it going again.
 
-**Why YT Shield?**
-Brave browser users have built-in ad blocking, but Chrome users don't. YT Shield fills that gap specifically for YouTube, staying lightweight and focused instead of trying to be a full-page ad blocker.
-
-**Privacy first** — YT Shield collects zero data. It has no analytics, no tracking, and no external servers. Everything runs locally in your browser.
+**Simple, focused, and private.**
+One toggle. No ads. No data collection. No bloat. Just the one thing it's supposed to do, done well.
 
 ---
 
@@ -41,7 +36,7 @@ Brave browser users have built-in ad blocking, but Chrome users don't. YT Shield
 Productivity
 
 ## Tags / Keywords
-youtube, ad blocker, youtube ads, skip ads, end cards, auto refresh, youtube enhancer, no ads, youtube cleaner
+youtube, auto refresh, youtube error, ad blocker fix, youtube blank video, playback error, youtube refresh, youtube fix
 
 ---
 
@@ -49,12 +44,18 @@ youtube, ad blocker, youtube ads, skip ads, end cards, auto refresh, youtube enh
 
 | Permission | Reason |
 |---|---|
-| `tabs` | Needed to detect YouTube tab navigation for auto-refresh logic |
-| `scripting` | Needed to inject the content script that removes DOM ad elements |
-| `storage` | Needed to save your toggle preferences (on/off per feature) |
-| `declarativeNetRequest` | Needed to block ad network requests before they load |
-| `*://*.youtube.com/*` | The extension only operates on YouTube |
-| `*://*.doubleclick.net/*` etc. | Required to block ad tracking network requests |
+| `tabs` | Detects YouTube SPA navigation so the auto-refresh counter resets correctly when the user clicks to a new video |
+| `storage` | Saves the user's on/off toggle preference locally in their browser |
+
+---
+
+## Single Purpose Description
+YT Shield automatically refreshes YouTube when ad-blocker detection causes a blank video player or playback error, eliminating the need to manually refresh the page.
+
+---
+
+## Privacy
+YT Shield collects no user data. No browsing history, no watch history, no personal identifiers. The only data stored is the user's on/off preference, saved locally using Chrome's storage API.
 
 ---
 
@@ -65,6 +66,8 @@ Free
 SudoDocs (Saurabh Sugandh)
 
 ## Developer Notes
-- Built with Manifest V3 (the current Chrome extension standard)
-- No background service worker needed for core features
-- Compatible with Chrome 88+ and all Chromium-based browsers (Brave, Edge, Opera, Vivaldi)
+- Built with Manifest V3
+- Only 2 permissions: `tabs` and `storage`
+- No background network requests
+- No remote code execution
+- Compatible with Chrome 88+ and all Chromium-based browsers
