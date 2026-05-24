@@ -46,6 +46,7 @@ youtube, auto refresh, youtube error, ad blocker fix, youtube blank video, playb
 |---|---|
 | `tabs` | Detects YouTube SPA navigation so the auto-refresh counter resets correctly when the user clicks to a new video |
 | `storage` | Saves the user's on/off toggle preference locally in their browser |
+| `*://*.youtube.com/*` | Required to run the content script on YouTube pages to monitor the video player for blank screens, playback errors, and frozen video in order to trigger an automatic page refresh |
 
 ---
 
