@@ -1,6 +1,6 @@
 // YT Shield – content.js
-// Single purpose: auto-refresh YouTube when ad-blocker detection
-// causes a blank video or playback error.
+// Auto-refreshes YouTube when ad-blocker detection causes blank video or error.
+// Fully respects the popup toggle — if disabled, does nothing.
 
 (function () {
   "use strict";
@@ -17,6 +17,21 @@
   let lastTimeCheck = Date.now();
   let isRefreshScheduled = false;
   let stuckTimer = null;
+  let enabled = true; // default on, updated from storage
+
+  // ── Load setting and keep in sync with popup toggle ────────────────────
+  chrome.storage.local.get({ autoRefresh: true }, (s) => {
+    if (!chrome.runtime.lastError) enabled = s.autoRefresh;
+  });
+
+  chrome.storage.onChanged.addListener((changes, area) => {
+    if (area === 'local' && 'autoRefresh' in changes) {
+      enabled = changes.autoRefresh.newValue;
+      console.log(`[YT Shield] autoRefresh set to ${enabled}`);
+      // If disabled, cancel any pending refresh
+      if (!enabled) isRefreshScheduled = false;
+    }
+  });
 
   // ── Toast notification ─────────────────────────────────────────────────
   function showToast(msg) {
@@ -40,13 +55,17 @@
 
   // ── Schedule a page refresh ────────────────────────────────────────────
   function scheduleRefresh(reason) {
+    if (!enabled) return;
     if (isRefreshScheduled) return;
     if (refreshCount >= CONFIG.maxRefreshes) return;
     isRefreshScheduled = true;
     refreshCount++;
     console.log(`[YT Shield] Refresh #${refreshCount}: ${reason}`);
     showToast(`Video error detected — refreshing in 4s… (${refreshCount}/${CONFIG.maxRefreshes})`);
-    setTimeout(() => window.location.reload(), CONFIG.refreshDelay);
+    setTimeout(() => {
+      if (enabled) window.location.reload();
+      else isRefreshScheduled = false;
+    }, CONFIG.refreshDelay);
   }
 
   // ── Detect YouTube error overlays ──────────────────────────────────────
@@ -69,13 +88,10 @@
     }
   }
 
-  // ── Detect blank video (ad-blocker detection causes white/blank player) ─
+  // ── Detect blank video ─────────────────────────────────────────────────
   function checkBlankVideo() {
     const video = document.querySelector("video");
-    if (!video) return;
-    if (video.paused || video.ended) return;
-
-    // Video is "playing" but has no visible content — readyState 0 or 1
+    if (!video || video.paused || video.ended) return;
     if (video.readyState < 2 && video.currentTime === 0) {
       if (!stuckTimer) {
         stuckTimer = setTimeout(() => {
@@ -89,11 +105,10 @@
     }
   }
 
-  // ── Detect stuck / frozen video ────────────────────────────────────────
+  // ── Detect frozen video ────────────────────────────────────────────────
   function checkVideoStuck() {
     const video = document.querySelector("video");
     if (!video || video.paused || video.ended || video.readyState === 0) return;
-
     const now = Date.now();
     if (now - lastTimeCheck >= 5000) {
       const delta = video.currentTime - lastCurrentTime;
@@ -128,6 +143,7 @@
 
   // ── Main polling loop ──────────────────────────────────────────────────
   function poll() {
+    if (!enabled) return; // respect the toggle
     if (isRefreshScheduled) return;
     checkErrorOverlay();
     checkBlankVideo();
@@ -135,5 +151,6 @@
   }
 
   setInterval(poll, CONFIG.checkInterval);
-  console.log("[YT Shield] Auto-refresh active.");
+  watchForModal();
+  console.log("[YT Shield] Active.");
 })();
